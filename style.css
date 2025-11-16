@@ -242,5 +242,104 @@ html {
 .whatsapp-share:hover {
   background-color: #1DA851;
 }
+table {
+  width: 90%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+}
+th {
+  background-color: #000;
+  color: white;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+#preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #e00;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.testimonial-slider {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+}
+.testimonial {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.testimonial.active {
+  opacity: 1;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.model-card {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.model-card:hover {
+  transform: scale(1.05);
+}
+.model-card img {
+  width: 100%;
+  height: auto;
+}
+.model-card h4 {
+  margin: 0;
+  padding: 0.5rem;
+  background: #000;
+  color: white;
+  text-align: center;
+}
+.model-details {
+  margin-top: 2rem;
+  text-align: center;
+}
+.model-details img {
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
 
 
