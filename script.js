@@ -212,4 +212,66 @@ searchInput.oninput = () => {
 };
 
 // Initial render
+
 renderCars(cars);
+const porscheModels = {
+  "911": { name: "911 Turbo S", category: "coupe", speed: "330 km/h", acceleration: "2.7 s", horsepower: "650 hp", image: "images/911.jpg", description: "Timeless design meets modern performance." },
+  "taycan": { name: "Taycan Turbo S", category: "electric", speed: "260 km/h", acceleration: "2.8 s", horsepower: "750 hp", image: "images/taycan.jpg", description: "Electric performance with Porsche DNA." },
+  "macan": { name: "Macan S", category: "suv", speed: "254 km/h", acceleration: "5.1 s", horsepower: "380 hp", image: "images/macan.jpg", description: "Compact SUV with Porsche soul." },
+  "panamera": { name: "Panamera GTS", category: "sedan", speed: "300 km/h", acceleration: "3.9 s", horsepower: "480 hp", image: "images/panamera.jpg", description: "Luxury and sport in perfect harmony." },
+  "cayenne": { name: "Cayenne Turbo GT", category: "suv", speed: "300 km/h", acceleration: "3.3 s", horsepower: "631 hp", image: "images/cayenne.jpg", description: "High-performance luxury SUV." },
+  "carrera": { name: "Carrera GT", category: "supercar", speed: "330 km/h", acceleration: "3.9 s", horsepower: "612 hp", image: "images/carrera-gt.jpg", description: "V10-powered analog masterpiece." },
+  "718cayman": { name: "718 Cayman GTS 4.0", category: "coupe", speed: "293 km/h", acceleration: "4.5 s", horsepower: "400 hp", image: "images/718cayman.jpg", description: "Mid-engine precision and agility." },
+  "959": { name: "Porsche 959", category: "classic", speed: "317 km/h", acceleration: "3.7 s", horsepower: "450 hp", image: "images/959.jpg", description: "1980s supercar and tech pioneer." },
+  "356": { name: "Porsche 356 Speedster", category: "classic", speed: "180 km/h", acceleration: "13.0 s", horsepower: "60 hp", image: "images/356.jpg", description: "The original Porsche legacy." }
+};
+
+function renderGrid(filter = "all") {
+  const grid = document.getElementById("modelGrid");
+  grid.innerHTML = "";
+  for (const key in porscheModels) {
+    const m = porscheModels[key];
+    if (filter === "all" || m.category === filter) {
+      const card = document.createElement("div");
+      card.className = "model-card";
+      card.innerHTML = `<img src="${m.image}" alt="${m.name}"><h4>${m.name}</h4>`;
+      card.onclick = () => showModel(key);
+      grid.appendChild(card);
+    }
+  }
+}
+
+function showModel(key) {
+  const m = porscheModels[key];
+  const display = document.getElementById("modelDisplay");
+  display.innerHTML = `
+    <h2>${m.name}</h2>
+    <img src="${m.image}" alt="${m.name}">
+    <p><strong>Top Speed:</strong> ${m.speed}</p>
+    <p><strong>0–100 km/h:</strong> ${m.acceleration}</p>
+    <p><strong>Horsepower:</strong> ${m.horsepower}</p>
+    <p>${m.description}</p>
+  `;
+}
+
+function filterModels(category) {
+  renderGrid(category);
+}
+
+function searchModels(query) {
+  const grid = document.getElementById("modelGrid");
+  grid.innerHTML = "";
+  const lowerQuery = query.toLowerCase();
+  for (const key in porscheModels) {
+    const m = porscheModels[key];
+    if (m.name.toLowerCase().includes(lowerQuery)) {
+      const card = document.createElement("div");
+      card.className = "model-card";
+      card.innerHTML = `<img src="${m.image}" alt="${m.name}"><h4>${m.name}</h4>`;
+      card.onclick = () => showModel(key);
+      grid.appendChild(card);
+    }
+  }
+}
+
+window.onload = () => renderGrid();
