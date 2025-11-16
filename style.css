@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 10px 20px;
+}
+
+header .left i {
+  font-size: 2em;
+  color: #f5c518;
+  cursor: pointer;
+}
+
+header .center h1 {
+  font-size: 1.8em;
+  color: #f5c518;
+}
+
+header .right input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.car-card {
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.car-card:hover {
+  transform: scale(1.05);
+}
+
+.car-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+#closeModal {
+  float: right;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #f5c518;
+}
+
+#carSpecs {
+  list-style: none;
+  padding: 0;
+}
+
+#carSpecs li {
+  margin: 5px 0;
+}
+
+#ratingStars i {
+  font-size: 1.5em;
+  color: #ccc;
+  cursor: pointer;
+}
+
+#ratingStars i.active {
+  color: #f5c518;
+}
+
+#colorOptions button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#addFavorite {
+  background-color: #f5c518;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.share {
+  background-color: #333;
+  color: #fff;
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  padding: 20px;
+  background-color: #000;
+  font-size: 0.9em;
+  color: #777;
+  text-align: center;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Porsche Showcase</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <div class="left">
+      <i class="fas fa-user-circle" title="Login with Google"></i>
+    </div>
+    <div class="center">
+      <h1>Porsche Collection</h1>
+    </div>
+    <div class="right">
+      <input type="text" id="searchInput" placeholder="Search cars..." />
+    </div>
+  </header>
+
+  <section id="carContainer" class="car-grid"></section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2 id="carName"></h2>
+      <img id="carImage" />
+      <ul id="carSpecs"></ul>
+      <div id="colorOptions"></div>
+      <div id="ratingStars"></div>
+      <p id="averageRating"></p>
+      <button id="addFavorite">❤️ Add to Favorites</button>
+      <div id="shareButtons">
+        <button class="share" id="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+        <button class="share" id="facebook"><i class="fab fa-facebook"></i> Facebook</button>
+        <button class="share" id="twitter"><i class="fab fa-twitter"></i> Twitter</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Porsche Legacy. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
