@@ -164,5 +164,23 @@ loader.load('models/porsche.glb', function (gltf) {
   renderer.render(scene, camera);
 });
 </script>
+<!-- Search and Filter -->
+<input type="text" id="searchInput" placeholder="Search Porsche models..." oninput="searchModels(this.value)">
+<select id="categoryFilter" onchange="filterModels(this.value)">
+  <option value="all">All Categories</option>
+  <option value="coupe">Coupe</option>
+  <option value="suv">SUV</option>
+  <option value="electric">Electric</option>
+  <option value="classic">Classic</option>
+  <option value="supercar">Supercar</option>
+  <option value="sedan">Sedan</option>
+</select>
+
+<!-- Model Grid -->
+<div id="modelGrid" class="grid"></div>
+
+<!-- Model Details -->
+<div id="modelDisplay" class="model-details"></div>
+
 
 
