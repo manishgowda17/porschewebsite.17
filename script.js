@@ -275,3 +275,21 @@ function searchModels(query) {
 }
 
 window.onload = () => renderGrid();
+function compareModels() {
+  const aKey = document.getElementById("compareA").value;
+  const bKey = document.getElementById("compareB").value;
+  if (!aKey || !bKey || aKey === bKey) return;
+
+  const a = porscheModels[aKey];
+  const b = porscheModels[bKey];
+
+  document.getElementById("comparisonResult").innerHTML = `
+    <table>
+      <tr><th>Spec</th><th>${a.name}</th><th>${b.name}</th></tr>
+      <tr><td>Top Speed</td><td>${a.speed}</td><td>${b.speed}</td></tr>
+      <tr><td>0–100 km/h</td><td>${a.acceleration}</td><td>${b.acceleration}</td></tr>
+      <tr><td>Horsepower</td><td>${a.horsepower}</td><td>${b.horsepower}</td></tr>
+    </table>
+  `;
+}
+
