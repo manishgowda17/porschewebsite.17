@@ -181,6 +181,27 @@ loader.load('models/porsche.glb', function (gltf) {
 
 <!-- Model Details -->
 <div id="modelDisplay" class="model-details"></div>
+<select id="compareA">
+  <option value="">Select Model A</option>
+  <option value="911">911 Turbo S</option>
+  <option value="taycan">Taycan Turbo S</option>
+  <option value="macan">Macan S</option>
+  <option value="panamera">Panamera GTS</option>
+  <option value="cayenne">Cayenne Turbo GT</option>
+  <option value="carrera">Carrera GT</option>
+  <option value="718cayman">718 Cayman</option>
+  <option value="959">Porsche 959</option>
+  <option value="356">Porsche 356</option>
+</select>
+
+<select id="compareB">
+  <option value="">Select Model B</option>
+  <!-- Same options as above -->
+</select>
+
+<button onclick="compareModels()">Compare</button>
+<div id="comparisonResult"></div>
+
 
 
 
