@@ -1,60 +1,119 @@
-body {
+/* Base Styles */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #0d0d0d;
   color: #fff;
+  line-height: 1.6;
 }
 
-header {
+/* Header & Navbar */
+header,
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #111;
-  padding: 10px 20px;
+  padding: 1rem 2rem;
+  color: white;
 }
 
-header .left i {
-  font-size: 2em;
-  color: #f5c518;
-  cursor: pointer;
-}
-
+.logo,
 header .center h1 {
   font-size: 1.8em;
   color: #f5c518;
 }
 
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #f5c518;
+}
+
+.search-bar input,
 header .right input {
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 5px;
   border: none;
   font-size: 1em;
 }
 
-.car-grid {
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+s
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+/* Car Grid */
+.car-grid,
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 2rem;
+  justify-content: center;
 }
 
-.car-card {
+/* Car Card */
+.car-card,
+.model-card {
   background-color: #1a1a1a;
-  padding: 10px;
   border-radius: 10px;
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
-.car-card:hover {
+.car-card:hover,
+.model-card:hover {
   transform: scale(1.05);
 }
 
-.car-card img {
+.car-card img,
+.model-card img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
+.car-info,
+.model-card h4 {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -63,6 +122,7 @@ header .right input {
   background-color: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
@@ -70,6 +130,7 @@ header .right input {
   padding: 20px;
   border-radius: 10px;
   max-width: 600px;
+  width: 90%;
   text-align: left;
 }
 
@@ -85,6 +146,7 @@ header .right input {
   color: #f5c518;
 }
 
+/* Specs & Ratings */
 #carSpecs {
   list-style: none;
   padding: 0;
@@ -104,161 +166,70 @@ header .right input {
   color: #f5c518;
 }
 
-#colorOptions button {
+/* Color Options & Buttons */
+#colorOptions button,
+#addFavorite,
+.share,
+.whatsapp-share {
   margin: 5px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
 }
 
 #addFavorite {
   background-color: #f5c518;
-  border: none;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 5px;
+  color: #000;
 }
 
 .share {
   background-color: #333;
   color: #fff;
-  margin: 5px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
+.whatsapp-share {
+  background-color: #25D366;
+  color: white;
+}
+
+.whatsapp-share:hover {
+  background-color: #1DA851;
+}
+
+/* Footer */
 footer {
   padding: 20px;
   background-color: #000;
   font-size: 0.9em;
   color: #777;
   text-align: center;
+}
 
-}
-/* Add to your CSS */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: black;
-  padding: 1rem 2rem;
-  color: white;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-}
-.hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
-.bg-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: black;
-  padding: 1rem 2rem;
-  color: white;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-}
-hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
-.bg-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-}
-html {
-  scroll-behavior: smooth;
-}
-.car-card {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-.car-card:hover {
-  transform: scale(1.05);
-}
-.car-info {
-  position: absolute;
-  bottom: 0;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  padding: 1rem;
-  width: 100%;
-}
-/* Style the button */
-.whatsapp-share {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.whatsapp-share:hover {
-  background-color: #1DA851;
-}
+/* Table */
 table {
   width: 90%;
   margin: 2rem auto;
   border-collapse: collapse;
 }
+
 th, td {
   border: 1px solid #ccc;
   padding: 12px;
   text-align: center;
 }
+
 th {
   background-color: #000;
   color: white;
 }
+
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #1a1a1a;
 }
+
+/* Preloader */
 #preloader {
   position: fixed;
   width: 100%;
@@ -269,6 +240,7 @@ tr:nth-child(even) {
   align-items: center;
   justify-content: center;
 }
+
 .loader {
   border: 6px solid #f3f3f3;
   border-top: 6px solid #e00;
@@ -277,69 +249,48 @@ tr:nth-child(even) {
   height: 50px;
   animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Scroll Animations */
 .hidden {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.6s ease-out;
 }
+
 .visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Testimonials */
 .testimonial-slider {
   position: relative;
   height: 100px;
   overflow: hidden;
 }
+
 .testimonial {
   position: absolute;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
+
 .testimonial.active {
   opacity: 1;
 }
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-.model-card {
-  width: 250px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.model-card:hover {
-  transform: scale(1.05);
-}
-.model-card img {
-  width: 100%;
-  height: auto;
-}
-.model-card h4 {
-  margin: 0;
-  padding: 0.5rem;
-  background: #000;
-  color: white;
-  text-align: center;
-}
+
+/* Model Details */
 .model-details {
   margin-top: 2rem;
   text-align: center;
 }
+
 .model-details img {
   width: 300px;
   margin-bottom: 1rem;
 }
-
-
-
