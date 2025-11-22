@@ -1,7 +1,7 @@
-  const cars = [
+const cars = [
   {
     name: "Porsche 911",
-    image: "911-red.jpg",
+    image: "images/911-red.jpg",
     colors: {
       Red: "images/911-red.jpg",
       Black: "images/911-black.jpg",
@@ -12,141 +12,204 @@
     topSpeed: "293 km/h",
     horsepower: "473 hp",
     acceleration: "0–100 km/h in 3.5s",
-    rating: [5, 4, 5],
-    category: "coupe",
-    description: "The iconic Porsche 911 blends timeless design with cutting-edge performance and precision engineering."
+    rating: [1,2,3,4,5]
   },
   {
     name: "Porsche Taycan",
-    image: "taycan.jpg",
+    image: "images/taycan.jpg",
     colors: {},
     year: 2020,
     price: "₹2.69 Crore",
     topSpeed: "260 km/h",
     horsepower: "616 hp",
     acceleration: "0–100 km/h in 3.2s",
-    rating: [],
-    category: "electric",
-    description: "The Taycan is Porsche’s first all-electric sports car, delivering instant torque and futuristic luxury."
+    rating: []
   },
   {
     name: "Porsche Macan",
-    image: "macan.jpg",
+    image: "images/macan.jpg",
     colors: {},
     year: 2023,
     price: "₹1.49 Crore",
     topSpeed: "272 km/h",
     horsepower: "440 hp",
     acceleration: "0–100 km/h in 4.3s",
-    rating: [],
-    category: "suv",
-    description: "A compact SUV with the soul of a sports car—agile, powerful, and unmistakably Porsche."
+    rating: []
   },
   {
     name: "Porsche Panamera",
-    image: "panamera.jpg",
+    image: "images/panamera.jpg",
     colors: {},
     year: 2024,
     price: "₹2.76 Crore",
     topSpeed: "315 km/h",
     horsepower: "680 hp",
     acceleration: "0–100 km/h in 3.2s",
-    rating: [],
-    category: "sedan",
-    description: "The Panamera combines luxury and performance in a sleek four-door coupe silhouette."
+    rating: []
   },
   {
     name: "Porsche Cayenne",
-    image: "cayenne.jpg",
+    image: "images/cayenne.jpg",
     colors: {},
     year: 2023,
     price: "₹1.36 Crore",
     topSpeed: "273 km/h",
     horsepower: "468 hp",
     acceleration: "0–100 km/h in 4.7s",
-    rating: [],
-    category: "suv",
-    description: "A high-performance SUV that offers both comfort and the thrill of a true Porsche."
+    rating: []
   },
   {
     name: "Porsche Carrera GT",
-    image: "carrera-gt.jpg",
+    image: "images/carrera-gt.jpg",
     colors: {},
     year: 2004,
     price: "₹5 Crore",
     topSpeed: "330 km/h",
     horsepower: "612 hp",
     acceleration: "0–100 km/h in 3.5s",
-    rating: [],
-    category: "supercar",
-    description: "A V10-powered analog masterpiece, the Carrera GT is a legend in Porsche’s performance lineage."
+    rating: []
   },
   {
     name: "Porsche 718 Cayman",
-    image: "718.jpg",
+    image: "images/718.jpg",
     colors: {},
     year: 2024,
     price: "₹1.48 Crore",
     topSpeed: "275 km/h",
     horsepower: "420 hp",
     acceleration: "0–100 km/h in 4.4s",
-    rating: [],
-    category: "coupe",
-    description: "The 718 Cayman delivers mid-engine balance and razor-sharp handling for pure driving pleasure."
+    rating: []
   },
   {
     name: "Porsche 959",
-    image: "959.jpg",
+    image: "images/959.jpg",
     colors: {},
     year: 1986,
     price: "₹3.5 Crore",
     topSpeed: "317 km/h",
     horsepower: "450 hp",
     acceleration: "0–100 km/h in 3.7s",
-    rating: [],
-    category: "classic",
-    description: "A technological marvel of the 1980s, the 959 set the benchmark for modern supercars."
+    rating: []
   },
   {
     name: "Porsche 356",
-    image: "356.jpg",
+    image: "images/356.jpg",
     colors: {},
     year: 1948,
     price: "₹1 Crore",
     topSpeed: "180 km/h",
     horsepower: "60 hp",
     acceleration: "0–100 km/h in 13s",
-    rating: [],
-    category: "classic",
-    description: "The original Porsche—lightweight, elegant, and the foundation of a legendary legacy."
+    rating: []
   }
 ];
 
-const carContainer = document.getElementById("models");
+const carContainer = document.getElementById("carContainer");
 const searchInput = document.getElementById("searchInput");
 const modal = document.getElementById("modal");
 const carName = document.getElementById("carName");
 const carImage = document.getElementById("carImage");
 const carSpecs = document.getElementById("carSpecs");
-const carDescription = document.getElementById("carDescription");
 const ratingStars = document.getElementById("ratingStars");
 const averageRating = document.getElementById("averageRating");
 const closeModal = document.getElementById("closeModal");
 const colorOptions = document.getElementById("colorOptions");
 const addFavorite = document.getElementById("addFavorite");
-const sortSelect = document.getElementById("sortSelect");
-const compareA = document.getElementById("compareA");
-const compareB = document.getElementById("compareB");
-const comparisonResult = document.getElementById("comparisonResult");
 
 function renderCars(list) {
   carContainer.innerHTML = "";
   list.forEach((car, index) => {
     const card = document.createElement("div");
     card.className = "car-card";
-    card.innerHTML = `<img src="${car.image}" alt="${car.name}" /><h3>${car.name}</h3>`;
+    card.innerHTML = `
+      <img src="${car.image}" alt="${car.name}" />
+      <h3>${car.name}</h3>
+    `;
     card.onclick = () => showModal(car, index);
     carContainer.appendChild(card);
   });
 }
 
+function showModal(car, index) {
+  carName.textContent = car.name;
+  carImage.src = car.image;
+  carSpecs.innerHTML = `
+    <li><strong>Year:</strong> ${car.year}</li>
+    <li><strong>Price:</strong> ${car.price}</li>
+    <li><strong>Top Speed:</strong> ${car.topSpeed}</li>
+    <li><strong>Horsepower:</strong> ${car.horsepower}</li>
+    <li><strong>Acceleration:</strong> ${car.acceleration}</li>
+  `;
+
+  // Color options
+  colorOptions.innerHTML = "";
+  for (const color in car.colors) {
+    const btn = document.createElement("button");
+    btn.textContent = color;
+    btn.onclick = () => {
+      car.image = car.colors[color];
+      carImage.src = car.image;
+    };
+    colorOptions.appendChild(btn);
+  }
+
+  // Rating
+  ratingStars.innerHTML = "";
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement("i");
+    star.className = "fas fa-star";
+    if (i <= Math.round(getAverage(car.rating))) star.classList.add("active");
+    star.onclick = () => {
+      car.rating.push(i);
+      showModal(car, index);
+    };
+    ratingStars.appendChild(star);
+  }
+  averageRating.textContent = `Average Rating: ${getAverage(car.rating).toFixed(1)} ⭐`;
+
+  // Favorites
+  addFavorite.onclick = () => {
+    let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+    if (!favs.includes(car.name)) {
+      favs.push(car.name);
+      localStorage.setItem("favorites", JSON.stringify(favs));
+      alert(`${car.name} added to favorites!`);
+    } else {
+      alert(`${car.name} is already in favorites.`);
+    }
+  };
+
+  // Sharing
+  document.getElementById("whatsapp").onclick = () => {
+    const text = `${car.name} - ${car.price}, ${car.topSpeed}, ${car.horsepower} ${window.location.href}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+  };
+  document.getElementById("facebook").onclick = () => {
+    const url = `${window.location.href}`;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+  };
+  document.getElementById("twitter").onclick = () => {
+    const text = `${car.name} - ${car.price}, ${car.topSpeed} ${window.location.href}`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+  };
+
+  modal.style.display = "flex";
+}
+
+function getAverage(arr) {
+  if (arr.length === 0) return 0;
+  return arr.reduce((a, b) => a + b, 0) / arr.length;
+}
+
+closeModal.onclick = () => {
+  modal.style.display = "none";
+};
+
+searchInput.oninput = () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = cars.filter(car => car.name.toLowerCase().includes(query));
+  renderCars(filtered);
+};
+
+// Initial render
+renderCars(cars);
