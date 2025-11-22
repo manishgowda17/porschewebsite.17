@@ -1,4 +1,4 @@
-const cars = [
+  const cars = [
   {
     name: "Porsche 911",
     image: "images/911-red.jpg",
@@ -12,7 +12,9 @@ const cars = [
     topSpeed: "293 km/h",
     horsepower: "473 hp",
     acceleration: "0–100 km/h in 3.5s",
-    rating: [1,2,3,4,5]
+    rating: [5, 4, 5],
+    category: "coupe",
+    description: "The iconic Porsche 911 blends timeless design with cutting-edge performance and precision engineering."
   },
   {
     name: "Porsche Taycan",
@@ -23,7 +25,9 @@ const cars = [
     topSpeed: "260 km/h",
     horsepower: "616 hp",
     acceleration: "0–100 km/h in 3.2s",
-    rating: []
+    rating: [],
+    category: "electric",
+    description: "The Taycan is Porsche’s first all-electric sports car, delivering instant torque and futuristic luxury."
   },
   {
     name: "Porsche Macan",
@@ -34,7 +38,9 @@ const cars = [
     topSpeed: "272 km/h",
     horsepower: "440 hp",
     acceleration: "0–100 km/h in 4.3s",
-    rating: []
+    rating: [],
+    category: "suv",
+    description: "A compact SUV with the soul of a sports car—agile, powerful, and unmistakably Porsche."
   },
   {
     name: "Porsche Panamera",
@@ -45,7 +51,9 @@ const cars = [
     topSpeed: "315 km/h",
     horsepower: "680 hp",
     acceleration: "0–100 km/h in 3.2s",
-    rating: []
+    rating: [],
+    category: "sedan",
+    description: "The Panamera combines luxury and performance in a sleek four-door coupe silhouette."
   },
   {
     name: "Porsche Cayenne",
@@ -56,7 +64,9 @@ const cars = [
     topSpeed: "273 km/h",
     horsepower: "468 hp",
     acceleration: "0–100 km/h in 4.7s",
-    rating: []
+    rating: [],
+    category: "suv",
+    description: "A high-performance SUV that offers both comfort and the thrill of a true Porsche."
   },
   {
     name: "Porsche Carrera GT",
@@ -67,7 +77,9 @@ const cars = [
     topSpeed: "330 km/h",
     horsepower: "612 hp",
     acceleration: "0–100 km/h in 3.5s",
-    rating: []
+    rating: [],
+    category: "supercar",
+    description: "A V10-powered analog masterpiece, the Carrera GT is a legend in Porsche’s performance lineage."
   },
   {
     name: "Porsche 718 Cayman",
@@ -78,7 +90,9 @@ const cars = [
     topSpeed: "275 km/h",
     horsepower: "420 hp",
     acceleration: "0–100 km/h in 4.4s",
-    rating: []
+    rating: [],
+    category: "coupe",
+    description: "The 718 Cayman delivers mid-engine balance and razor-sharp handling for pure driving pleasure."
   },
   {
     name: "Porsche 959",
@@ -89,7 +103,9 @@ const cars = [
     topSpeed: "317 km/h",
     horsepower: "450 hp",
     acceleration: "0–100 km/h in 3.7s",
-    rating: []
+    rating: [],
+    category: "classic",
+    description: "A technological marvel of the 1980s, the 959 set the benchmark for modern supercars."
   },
   {
     name: "Porsche 356",
@@ -100,23 +116,28 @@ const cars = [
     topSpeed: "180 km/h",
     horsepower: "60 hp",
     acceleration: "0–100 km/h in 13s",
-    rating: []
+    rating: [],
+    category: "classic",
+    description: "The original Porsche—lightweight, elegant, and the foundation of a legendary legacy."
   }
 ];
-const carContainer = document.getElementById("carContainer");
+
+const carContainer = document.getElementById("models");
 const searchInput = document.getElementById("searchInput");
 const modal = document.getElementById("modal");
 const carName = document.getElementById("carName");
 const carImage = document.getElementById("carImage");
 const carSpecs = document.getElementById("carSpecs");
+const carDescription = document.getElementById("carDescription");
 const ratingStars = document.getElementById("ratingStars");
 const averageRating = document.getElementById("averageRating");
 const closeModal = document.getElementById("closeModal");
 const colorOptions = document.getElementById("colorOptions");
 const addFavorite = document.getElementById("addFavorite");
-const sortSelect = document.getElementById("sortSelect"); // Add this dropdown in HTML
-
-const cars = [/* your car objects with added category field */];
+const sortSelect = document.getElementById("sortSelect");
+const compareA = document.getElementById("compareA");
+const compareB = document.getElementById("compareB");
+const comparisonResult = document.getElementById("comparisonResult");
 
 function renderCars(list) {
   carContainer.innerHTML = "";
@@ -128,129 +149,3 @@ function renderCars(list) {
     carContainer.appendChild(card);
   });
 }
-
-function showModal(car, index) {
-  carName.textContent = car.name;
-  carImage.src = car.image;
-  carSpecs.innerHTML = `
-    <li><strong>Year:</strong> ${car.year}</li>
-    <li><strong>Price:</strong> ${car.price}</li>
-    <li><strong>Top Speed:</strong> ${car.topSpeed}</li>
-    <li><strong>Horsepower:</strong> ${car.horsepower}</li>
-    <li><strong>Acceleration:</strong> ${car.acceleration}</li>
-  `;
-
-  colorOptions.innerHTML = "";
-  Object.entries(car.colors).forEach(([color, img]) => {
-    const btn = document.createElement("button");
-    btn.textContent = color;
-    btn.onclick = () => {
-      carImage.src = img;
-    };
-    colorOptions.appendChild(btn);
-  });
-
-  ratingStars.innerHTML = "";
-  const ratings = getRatings(car.name);
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("i");
-    star.className = "fas fa-star";
-    if (i <= Math.round(getAverage(ratings))) star.classList.add("active");
-    star.onclick = () => {
-      saveRating(car.name, i);
-      showModal(car, index);
-    };
-    ratingStars.appendChild(star);
-  }
-  averageRating.textContent = `Average Rating: ${getAverage(ratings).toFixed(1)} ⭐`;
-
-  addFavorite.onclick = () => {
-    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-    if (!favs.includes(car.name)) {
-      favs.push(car.name);
-      localStorage.setItem("favorites", JSON.stringify(favs));
-      alert(`${car.name} added to favorites!`);
-    } else {
-      alert(`${car.name} is already in favorites.`);
-    }
-  };
-
-  const shareText = `${car.name} - ${car.price}, ${car.topSpeed}, ${car.horsepower} ${window.location.href}`;
-  document.getElementById("whatsapp").onclick = () => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`);
-  };
-  document.getElementById("facebook").onclick = () => {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
-  };
-  document.getElementById("twitter").onclick = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`);
-  };
-
-  modal.style.display = "flex";
-}
-
-function getRatings(name) {
-  const ratings = JSON.parse(localStorage.getItem("ratings") || "{}");
-  return ratings[name] || [];
-}
-
-function saveRating(name, value) {
-  const ratings = JSON.parse(localStorage.getItem("ratings") || "{}");
-  if (!ratings[name]) ratings[name] = [];
-  ratings[name].push(value);
-  localStorage.setItem("ratings", JSON.stringify(ratings));
-}
-
-function getAverage(arr) {
-  return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
-}
-
-closeModal.onclick = () => {
-  modal.style.display = "none";
-};
-
-searchInput.oninput = () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = cars.filter(car => car.name.toLowerCase().includes(query));
-  renderCars(filtered);
-};
-
-function sortCars(criteria) {
-  const sorted = [...cars].sort((a, b) => {
-    if (criteria === "price") {
-      return parseInt(a.price.replace(/\D/g, '')) - parseInt(b.price.replace(/\D/g, ''));
-    } else if (criteria === "speed") {
-      return parseInt(b.topSpeed) - parseInt(a.topSpeed);
-    } else if (criteria === "year") {
-      return b.year - a.year;
-    }
-  });
-  renderCars(sorted);
-}
-
-sortSelect.onchange = () => {
-  sortCars(sortSelect.value);
-};
-
-// Comparison
-function compareModels() {
-  const aKey = document.getElementById("compareA").value;
-  const bKey = document.getElementById("compareB").value;
-  if (!aKey || !bKey || aKey === bKey) return;
-
-  const a = cars.find(c => c.name.includes(aKey));
-  const b = cars.find(c => c.name.includes(bKey));
-
-  document.getElementById("comparisonResult").innerHTML = `
-    <table>
-      <tr><th>Spec</th><th>${a.name}</th><th>${b.name}</th></tr>
-      <tr><td>Top Speed</td><td>${a.topSpeed}</td><td>${b.topSpeed}</td></tr>
-      <tr><td>0–100 km/h</td><td>${a.acceleration}</td><td>${b.acceleration}</td></tr>
-      <tr><td>Horsepower</td><td>${a.horsepower}</td><td>${b.horsepower}</td></tr>
-      <tr><td>Price</td><td>${a.price}</td><td>${b.price}</td></tr>
-    </table>
-  `;
-}
-
-// Initial render
-renderCars(cars);
