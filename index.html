@@ -8,68 +8,38 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="navbar">
-    <div class="logo">Porsche Gallery</div>
-    <ul class="nav-links">
-      <li><a href="#models">Models</a></li>
-      <li><a href="#compare">Compare</a></li>
-      <li><a href="#favorites">Favorites</a></li>
-    </ul>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search Porsche models..." />
-      <select id="categoryFilter" onchange="filterModels(this.value)">
-        <option value="all">All Categories</option>
-        <option value="coupe">Coupe</option>
-        <option value="suv">SUV</option>
-        <option value="electric">Electric</option>
-        <option value="sedan">Sedan</option>
-        <option value="supercar">Supercar</option>
-        <option value="classic">Classic</option>
-      </select>
-      <select id="sortSelect" onchange="sortCars(this.value)">
-        <option value="">Sort By</option>
-        <option value="price">Price</option>
-        <option value="speed">Top Speed</option>
-        <option value="year">Year</option>
-      </select>
+  <header>
+    <div class="left">
+      <i class="fas fa-user-circle" title="Login with Google"></i>
+    </div>
+    <div class="center">
+      <h1>Porsche Collection</h1>
+    </div>
+    <div class="right">
+      <input type="text" id="searchInput" placeholder="Search cars..." />
     </div>
   </header>
 
-  <!-- Car Grid -->
-  <section id="models" class="car-grid"></section>
+  <section id="carContainer" class="car-grid"></section>
 
-  <!-- Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <span id="closeModal">&times;</span>
       <h2 id="carName"></h2>
       <img id="carImage" />
       <ul id="carSpecs"></ul>
-      <p id="carDescription"></p>
       <div id="colorOptions"></div>
       <div id="ratingStars"></div>
       <p id="averageRating"></p>
       <button id="addFavorite">❤️ Add to Favorites</button>
       <div id="shareButtons">
-        <button class="share" id="whatsapp"><i class="fab fa-whatsapp"></i></button>
-        <button class="share" id="facebook"><i class="fab fa-facebook"></i></button>
-        <button class="share" id="twitter"><i class="fab fa-twitter"></i></button>
+        <button class="share" id="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+        <button class="share" id="facebook"><i class="fab fa-facebook"></i> Facebook</button>
+        <button class="share" id="twitter"><i class="fab fa-twitter"></i> Twitter</button>
       </div>
     </div>
   </div>
 
-  <!-- Comparison -->
-  <section id="compare">
-    <h2>Compare Models</h2>
-    <select id="compareA"></select>
-    <select id="compareB"></select>
-    <button onclick="compareModels()">Compare</button>
-    <div id="comparisonResult"></div>
-  </section>
-
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Porsche Legacy. All rights reserved.</p>
   </footer>
@@ -77,4 +47,3 @@
   <script src="script.js"></script>
 </body>
 </html>
- 
