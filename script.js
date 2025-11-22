@@ -1,7 +1,7 @@
   const cars = [
   {
     name: "Porsche 911",
-    image: "images/911-red.jpg",
+    image: "911-red.jpg",
     colors: {
       Red: "images/911-red.jpg",
       Black: "images/911-black.jpg",
@@ -18,7 +18,7 @@
   },
   {
     name: "Porsche Taycan",
-    image: "images/taycan.jpg",
+    image: "taycan.jpg",
     colors: {},
     year: 2020,
     price: "₹2.69 Crore",
@@ -31,7 +31,7 @@
   },
   {
     name: "Porsche Macan",
-    image: "images/macan.jpg",
+    image: "macan.jpg",
     colors: {},
     year: 2023,
     price: "₹1.49 Crore",
@@ -44,7 +44,7 @@
   },
   {
     name: "Porsche Panamera",
-    image: "images/panamera.jpg",
+    image: "panamera.jpg",
     colors: {},
     year: 2024,
     price: "₹2.76 Crore",
@@ -57,7 +57,7 @@
   },
   {
     name: "Porsche Cayenne",
-    image: "images/cayenne.jpg",
+    image: "cayenne.jpg",
     colors: {},
     year: 2023,
     price: "₹1.36 Crore",
@@ -70,7 +70,7 @@
   },
   {
     name: "Porsche Carrera GT",
-    image: "images/carrera-gt.jpg",
+    image: "carrera-gt.jpg",
     colors: {},
     year: 2004,
     price: "₹5 Crore",
@@ -83,7 +83,7 @@
   },
   {
     name: "Porsche 718 Cayman",
-    image: "images/718.jpg",
+    image: "718.jpg",
     colors: {},
     year: 2024,
     price: "₹1.48 Crore",
@@ -96,7 +96,7 @@
   },
   {
     name: "Porsche 959",
-    image: "images/959.jpg",
+    image: "959.jpg",
     colors: {},
     year: 1986,
     price: "₹3.5 Crore",
@@ -109,7 +109,7 @@
   },
   {
     name: "Porsche 356",
-    image: "images/356.jpg",
+    image: "356.jpg",
     colors: {},
     year: 1948,
     price: "₹1 Crore",
@@ -149,3 +149,4 @@ function renderCars(list) {
     carContainer.appendChild(card);
   });
 }
+
