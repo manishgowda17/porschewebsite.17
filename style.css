@@ -5,37 +5,26 @@ body {
   color: #fff;
 }
 
-.navbar {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #111;
-  padding: 1rem 2rem;
+  padding: 10px 20px;
 }
 
-.logo {
+header .left i {
+  font-size: 2em;
+  color: #f5c518;
+  cursor: pointer;
+}
+
+header .center h1 {
   font-size: 1.8em;
   color: #f5c518;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-}
-
-.search-bar {
-  display: flex;
-  gap: 1rem;
-}
-
-.search-bar input,
-.search-bar select {
+header .right input {
   padding: 8px;
   border-radius: 5px;
   border: none;
@@ -46,15 +35,15 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 2rem;
+  padding: 20px;
 }
 
 .car-card {
   background-color: #1a1a1a;
+  padding: 10px;
   border-radius: 10px;
-  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
 }
 
 .car-card:hover {
@@ -63,12 +52,7 @@ body {
 
 .car-card img {
   width: 100%;
-  border-radius: 10px 10px 0 0;
-}
-
-.car-card h3 {
-  text-align: center;
-  padding: 1rem;
+  border-radius: 10px;
 }
 
 .modal {
@@ -79,7 +63,6 @@ body {
   background-color: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
 .modal-content {
@@ -87,7 +70,6 @@ body {
   padding: 20px;
   border-radius: 10px;
   max-width: 600px;
-  width: 90%;
   text-align: left;
 }
 
@@ -122,11 +104,9 @@ body {
   color: #f5c518;
 }
 
-#colorOptions button,
-#addFavorite,
-.share {
+#colorOptions button {
   margin: 5px;
-  padding: 10px;
+  padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -134,12 +114,21 @@ body {
 
 #addFavorite {
   background-color: #f5c518;
-  color: #000;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .share {
   background-color: #333;
   color: #fff;
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 footer {
@@ -148,22 +137,4 @@ footer {
   font-size: 0.9em;
   color: #777;
   text-align: center;
-}
-
-#comparisonResult table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-#comparisonResult th,
-#comparisonResult td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-#comparisonResult th {
-  background-color: #000;
-  color: white;
 }
