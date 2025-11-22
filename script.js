@@ -103,7 +103,6 @@ const cars = [
     rating: []
   }
 ];
-
 const carContainer = document.getElementById("carContainer");
 const searchInput = document.getElementById("searchInput");
 const modal = document.getElementById("modal");
@@ -115,16 +114,16 @@ const averageRating = document.getElementById("averageRating");
 const closeModal = document.getElementById("closeModal");
 const colorOptions = document.getElementById("colorOptions");
 const addFavorite = document.getElementById("addFavorite");
+const sortSelect = document.getElementById("sortSelect"); // Add this dropdown in HTML
+
+const cars = [/* your car objects with added category field */];
 
 function renderCars(list) {
   carContainer.innerHTML = "";
   list.forEach((car, index) => {
     const card = document.createElement("div");
     card.className = "car-card";
-    card.innerHTML = `
-      <img src="${car.image}" alt="${car.name}" />
-      <h3>${car.name}</h3>
-    `;
+    card.innerHTML = `<img src="${car.image}" alt="${car.name}" /><h3>${car.name}</h3>`;
     card.onclick = () => showModal(car, index);
     carContainer.appendChild(card);
   });
@@ -141,35 +140,32 @@ function showModal(car, index) {
     <li><strong>Acceleration:</strong> ${car.acceleration}</li>
   `;
 
-  // Color options
   colorOptions.innerHTML = "";
-  for (const color in car.colors) {
+  Object.entries(car.colors).forEach(([color, img]) => {
     const btn = document.createElement("button");
     btn.textContent = color;
     btn.onclick = () => {
-      car.image = car.colors[color];
-      carImage.src = car.image;
+      carImage.src = img;
     };
     colorOptions.appendChild(btn);
-  }
+  });
 
-  // Rating
   ratingStars.innerHTML = "";
+  const ratings = getRatings(car.name);
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("i");
     star.className = "fas fa-star";
-    if (i <= Math.round(getAverage(car.rating))) star.classList.add("active");
+    if (i <= Math.round(getAverage(ratings))) star.classList.add("active");
     star.onclick = () => {
-      car.rating.push(i);
+      saveRating(car.name, i);
       showModal(car, index);
     };
     ratingStars.appendChild(star);
   }
-  averageRating.textContent = `Average Rating: ${getAverage(car.rating).toFixed(1)} ⭐`;
+  averageRating.textContent = `Average Rating: ${getAverage(ratings).toFixed(1)} ⭐`;
 
-  // Favorites
   addFavorite.onclick = () => {
-    let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
     if (!favs.includes(car.name)) {
       favs.push(car.name);
       localStorage.setItem("favorites", JSON.stringify(favs));
@@ -179,26 +175,34 @@ function showModal(car, index) {
     }
   };
 
-  // Sharing
+  const shareText = `${car.name} - ${car.price}, ${car.topSpeed}, ${car.horsepower} ${window.location.href}`;
   document.getElementById("whatsapp").onclick = () => {
-    const text = `${car.name} - ${car.price}, ${car.topSpeed}, ${car.horsepower} ${window.location.href}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`);
   };
   document.getElementById("facebook").onclick = () => {
-    const url = `${window.location.href}`;
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
   };
   document.getElementById("twitter").onclick = () => {
-    const text = `${car.name} - ${car.price}, ${car.topSpeed} ${window.location.href}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`);
   };
 
   modal.style.display = "flex";
 }
 
+function getRatings(name) {
+  const ratings = JSON.parse(localStorage.getItem("ratings") || "{}");
+  return ratings[name] || [];
+}
+
+function saveRating(name, value) {
+  const ratings = JSON.parse(localStorage.getItem("ratings") || "{}");
+  if (!ratings[name]) ratings[name] = [];
+  ratings[name].push(value);
+  localStorage.setItem("ratings", JSON.stringify(ratings));
+}
+
 function getAverage(arr) {
-  if (arr.length === 0) return 0;
-  return arr.reduce((a, b) => a + b, 0) / arr.length;
+  return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
 }
 
 closeModal.onclick = () => {
@@ -211,85 +215,42 @@ searchInput.oninput = () => {
   renderCars(filtered);
 };
 
-// Initial render
+function sortCars(criteria) {
+  const sorted = [...cars].sort((a, b) => {
+    if (criteria === "price") {
+      return parseInt(a.price.replace(/\D/g, '')) - parseInt(b.price.replace(/\D/g, ''));
+    } else if (criteria === "speed") {
+      return parseInt(b.topSpeed) - parseInt(a.topSpeed);
+    } else if (criteria === "year") {
+      return b.year - a.year;
+    }
+  });
+  renderCars(sorted);
+}
 
-renderCars(cars);
-const porscheModels = {
-  "911": { name: "911 Turbo S", category: "coupe", speed: "330 km/h", acceleration: "2.7 s", horsepower: "650 hp", image: "images/911.jpg", description: "Timeless design meets modern performance." },
-  "taycan": { name: "Taycan Turbo S", category: "electric", speed: "260 km/h", acceleration: "2.8 s", horsepower: "750 hp", image: "images/taycan.jpg", description: "Electric performance with Porsche DNA." },
-  "macan": { name: "Macan S", category: "suv", speed: "254 km/h", acceleration: "5.1 s", horsepower: "380 hp", image: "images/macan.jpg", description: "Compact SUV with Porsche soul." },
-  "panamera": { name: "Panamera GTS", category: "sedan", speed: "300 km/h", acceleration: "3.9 s", horsepower: "480 hp", image: "images/panamera.jpg", description: "Luxury and sport in perfect harmony." },
-  "cayenne": { name: "Cayenne Turbo GT", category: "suv", speed: "300 km/h", acceleration: "3.3 s", horsepower: "631 hp", image: "images/cayenne.jpg", description: "High-performance luxury SUV." },
-  "carrera": { name: "Carrera GT", category: "supercar", speed: "330 km/h", acceleration: "3.9 s", horsepower: "612 hp", image: "images/carrera-gt.jpg", description: "V10-powered analog masterpiece." },
-  "718cayman": { name: "718 Cayman GTS 4.0", category: "coupe", speed: "293 km/h", acceleration: "4.5 s", horsepower: "400 hp", image: "images/718cayman.jpg", description: "Mid-engine precision and agility." },
-  "959": { name: "Porsche 959", category: "classic", speed: "317 km/h", acceleration: "3.7 s", horsepower: "450 hp", image: "images/959.jpg", description: "1980s supercar and tech pioneer." },
-  "356": { name: "Porsche 356 Speedster", category: "classic", speed: "180 km/h", acceleration: "13.0 s", horsepower: "60 hp", image: "images/356.jpg", description: "The original Porsche legacy." }
+sortSelect.onchange = () => {
+  sortCars(sortSelect.value);
 };
 
-function renderGrid(filter = "all") {
-  const grid = document.getElementById("modelGrid");
-  grid.innerHTML = "";
-  for (const key in porscheModels) {
-    const m = porscheModels[key];
-    if (filter === "all" || m.category === filter) {
-      const card = document.createElement("div");
-      card.className = "model-card";
-      card.innerHTML = `<img src="${m.image}" alt="${m.name}"><h4>${m.name}</h4>`;
-      card.onclick = () => showModel(key);
-      grid.appendChild(card);
-    }
-  }
-}
-
-function showModel(key) {
-  const m = porscheModels[key];
-  const display = document.getElementById("modelDisplay");
-  display.innerHTML = `
-    <h2>${m.name}</h2>
-    <img src="${m.image}" alt="${m.name}">
-    <p><strong>Top Speed:</strong> ${m.speed}</p>
-    <p><strong>0–100 km/h:</strong> ${m.acceleration}</p>
-    <p><strong>Horsepower:</strong> ${m.horsepower}</p>
-    <p>${m.description}</p>
-  `;
-}
-
-function filterModels(category) {
-  renderGrid(category);
-}
-
-function searchModels(query) {
-  const grid = document.getElementById("modelGrid");
-  grid.innerHTML = "";
-  const lowerQuery = query.toLowerCase();
-  for (const key in porscheModels) {
-    const m = porscheModels[key];
-    if (m.name.toLowerCase().includes(lowerQuery)) {
-      const card = document.createElement("div");
-      card.className = "model-card";
-      card.innerHTML = `<img src="${m.image}" alt="${m.name}"><h4>${m.name}</h4>`;
-      card.onclick = () => showModel(key);
-      grid.appendChild(card);
-    }
-  }
-}
-
-window.onload = () => renderGrid();
+// Comparison
 function compareModels() {
   const aKey = document.getElementById("compareA").value;
   const bKey = document.getElementById("compareB").value;
   if (!aKey || !bKey || aKey === bKey) return;
 
-  const a = porscheModels[aKey];
-  const b = porscheModels[bKey];
+  const a = cars.find(c => c.name.includes(aKey));
+  const b = cars.find(c => c.name.includes(bKey));
 
   document.getElementById("comparisonResult").innerHTML = `
     <table>
       <tr><th>Spec</th><th>${a.name}</th><th>${b.name}</th></tr>
-      <tr><td>Top Speed</td><td>${a.speed}</td><td>${b.speed}</td></tr>
+      <tr><td>Top Speed</td><td>${a.topSpeed}</td><td>${b.topSpeed}</td></tr>
       <tr><td>0–100 km/h</td><td>${a.acceleration}</td><td>${b.acceleration}</td></tr>
       <tr><td>Horsepower</td><td>${a.horsepower}</td><td>${b.horsepower}</td></tr>
+      <tr><td>Price</td><td>${a.price}</td><td>${b.price}</td></tr>
     </table>
   `;
 }
 
+// Initial render
+renderCars(cars);
