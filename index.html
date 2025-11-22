@@ -6,27 +6,55 @@
   <title>Porsche Showcase</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta name="description" content="Explore the finest Porsche models with stunning visuals and specs.">
+  <meta property="og:title" content="Porsche Showcase">
+  <meta property="og:image" content="images/og-preview.jpg">
+  <meta property="og:description" content="A tribute to Porsche's engineering excellence.">
 </head>
 <body>
-  <header>
-    <div class="left">
-      <i class="fas fa-user-circle" title="Login with Google"></i>
-    </div>
-    <div class="center">
-      <h1>Porsche Collection</h1>
-    </div>
-    <div class="right">
-      <input type="text" id="searchInput" placeholder="Search cars..." />
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo">Porsche Gallery</div>
+    <ul class="nav-links">
+      <li><a href="#models">Models</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Porsche models..." oninput="searchModels(this.value)">
     </div>
   </header>
 
-  <section id="carContainer" class="car-grid"></section>
+  <!-- Hero Section -->
+  <section id="hero">
+    <img src="images/hero.jpg" alt="Porsche Hero" class="hero-image" />
+    <h1>Experience the Legacy of Porsche</h1>
+  </section>
 
+  <!-- Filter -->
+  <section id="filter">
+    <select id="categoryFilter" onchange="filterModels(this.value)">
+      <option value="all">All Categories</option>
+      <option value="coupe">Coupe</option>
+      <option value="suv">SUV</option>
+      <option value="electric">Electric</option>
+      <option value="classic">Classic</option>
+      <option value="supercar">Supercar</option>
+      <option value="sedan">Sedan</option>
+    </select>
+  </section>
+
+  <!-- Model Grid -->
+  <section id="models" class="grid"></section>
+
+  <!-- Model Details Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <span id="closeModal">&times;</span>
       <h2 id="carName"></h2>
-      <img id="carImage" />
+      <img id="carImage" alt="Car Image" />
       <ul id="carSpecs"></ul>
       <div id="colorOptions"></div>
       <div id="ratingStars"></div>
@@ -40,110 +68,24 @@
     </div>
   </div>
 
+  <!-- 3D Model Viewer -->
+  <section class="model-3d">
+    <iframe title="Porsche 911 3D" frameborder="0" allowfullscreen
+      src="https://sketchfab.com/models/YOUR_MODEL_ID/embed"
+      width="100%" height="480">
+    </iframe>
+  </section>
+
+  <!-- QR Code -->
+  <section id="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://manishgowda17.github.io/porschewebsite.17&size=150x150" alt="QR Code">
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Porsche Legacy. All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-
 </html>
-<nav class="navbar">
-  <div class="logo">Porsche Gallery</div>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#models">Models</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-
-</section>
-<meta name="description" content="Explore the finest Porsche models with stunning visuals and specs.">
-<meta property="og:title" content="Porsche Showcase">
-<meta property="og:image" content="images/og-preview.jpg">
-<meta property="og:description" content="A tribute to Porsche's engineering excellence.">
-
-<section id="hero">...</section>
-<section id="models">...</section>
-<section id="gallery">...</section>
-<section id="specs">...</section>
-<section id="contact">...</section>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?data=https://manishgowda17.github.io/porschewebsite.17&size=150x150" alt="QR Code">
-<!-- Filter Dropdown -->
-<select id="categoryFilter" onchange="filterModels(this.value)">
-  <option value="all">All Categories</option>
-  <option value="coupe">Coupe</option>
-  <option value="suv">SUV</option>
-  <option value="electric">Electric</option>
-</select>
-
-<!-- Model Grid -->
-<div id="modelGrid" class="grid"></div>
-
-<!-- Dynamic Display -->
-<div id="modelDisplay" class="model-details"></div>
-<input type="text" id="searchInput" placeholder="Search Porsche models..." oninput="searchModels(this.value)">
-<div id="paginationControls"></div>
-<div class="model-3d">
-  <iframe title="Porsche 911 3D" frameborder="0" allowfullscreen
-    src="https://sketchfab.com/models/YOUR_MODEL_ID/embed"
-    width="100%" height="480">
-  </iframe>
-</div>
-<iframe title="Porsche 911 GT3" frameborder="0" allowfullscreen
-  src="https://sketchfab.com/models/YOUR_MODEL_ID/embed"
-  width="100%" height="480">
-</iframe>
-<script type="module">
-import * as THREE from 'https://cdn.skypack.dev/three';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-const loader = new GLTFLoader();
-loader.load('models/porsche.glb', function (gltf) {
-  scene.add(gltf.scene);
-  camera.position.z = 5;
-  renderer.render(scene, camera);
-});
-</script>
-<!-- Search and Filter -->
-<input type="text" id="searchInput" placeholder="Search Porsche models..." oninput="searchModels(this.value)">
-<select id="categoryFilter" onchange="filterModels(this.value)">
-  <option value="all">All Categories</option>
-  <option value="coupe">Coupe</option>
-  <option value="suv">SUV</option>
-  <option value="electric">Electric</option>
-  <option value="classic">Classic</option>
-  <option value="supercar">Supercar</option>
-  <option value="sedan">Sedan</option>
-</select>
-
-<!-- Model Grid -->
-<div id="modelGrid" class="grid"></div>
-
-<!-- Model Details -->
-<div id="modelDisplay" class="model-details"></div>
-<select id="compareA">
-  <option value="">Select Model A</option>
-  <option value="911">911 Turbo S</option>
-  <option value="taycan">Taycan Turbo S</option>
-  <option value="macan">Macan S</option>
-  <option value="panamera">Panamera GTS</option>
-  <option value="cayenne">Cayenne Turbo GT</option>
-  <option value="carrera">Carrera GT</option>
-  <option value="718cayman">718 Cayman</option>
-  <option value="959">Porsche 959</option>
-  <option value="356">Porsche 356</option>
-</select>
-
-
-
-
-
-
